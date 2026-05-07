@@ -1,0 +1,133 @@
+{
+  "entities": {
+    "User": {
+      "title": "User Profile",
+      "description": "User profile and application state",
+      "type": "object",
+      "properties": {
+        "appState": {
+          "type": "object",
+          "description": "Current navigation state of the app"
+        },
+        "preferences": {
+          "type": "object",
+          "description": "User preferences like language"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last update timestamp"
+        }
+      },
+      "required": ["updatedAt"]
+    },
+    "Chat": {
+      "title": "Chat History",
+      "description": "User chat messages with AI",
+      "type": "object",
+      "properties": {
+        "messages": {
+          "type": "array",
+          "description": "List of chat messages"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last update timestamp"
+        }
+      },
+      "required": ["messages", "updatedAt"]
+    },
+    "Review": {
+      "title": "Student Review",
+      "description": "Review submitted by a student",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "year": { "type": "string" },
+        "review": { "type": "string" },
+        "rating": { "type": "number" },
+        "approved": { "type": "boolean" },
+        "imageUrl": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name", "year", "review", "rating", "approved", "createdAt"]
+    },
+    "AssetOverride": {
+      "title": "Asset Override",
+      "description": "Dynamic asset URL overrides",
+      "type": "object",
+      "properties": {
+        "assetKey": { "type": "string" },
+        "url": { "type": "string" },
+        "isActive": { "type": "boolean" }
+      },
+      "required": ["assetKey", "url", "isActive"]
+    },
+    "Announcement": {
+      "title": "Announcement",
+      "description": "Banner announcements",
+      "type": "object",
+      "properties": {
+        "label": { "type": "string" },
+        "href": { "type": "string" },
+        "type": { "type": "string", "enum": ["global", "subpage_app", "subpage_youtube"] },
+        "isActive": { "type": "boolean" },
+        "priority": { "type": "number" }
+      },
+      "required": ["label", "href", "type", "isActive"]
+    },
+    "ContactInquiry": {
+      "title": "Contact Inquiry",
+      "description": "Message from the contact form",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "email": { "type": "string" },
+        "phone": { "type": "string" },
+        "subject": { "type": "string" },
+        "message": { "type": "string" },
+        "status": { "type": "string", "enum": ["new", "read", "resolved"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name", "email", "phone", "subject", "message", "status", "createdAt"]
+    }
+  },
+  "firestore": {
+    "users/{userId}": {
+      "schema": { "$ref": "#/entities/User" },
+      "description": "User profile and state documents"
+    },
+    "chats/{userId}": {
+      "schema": { "$ref": "#/entities/Chat" },
+      "description": "Chat history documents"
+    },
+    "reviews/{reviewId}": {
+      "schema": { "$ref": "#/entities/Review" },
+      "description": "Public review documents"
+    },
+    "assetOverrides/{assetId}": {
+      "schema": { "$ref": "#/entities/AssetOverride" },
+      "description": "Dynamic assets"
+    },
+    "announcements/{announcementId}": {
+      "schema": { "$ref": "#/entities/Announcement" },
+      "description": "Banner announcements"
+    },
+    "contacts/{contactId}": {
+      "schema": { "$ref": "#/entities/ContactInquiry" },
+      "description": "Customer contact submissions"
+    },
+    "admins/{adminId}": {
+      "schema": {
+        "title": "Admin",
+        "type": "object",
+        "properties": {
+          "email": { "type": "string" },
+          "role": { "type": "string" }
+        }
+      },
+      "description": "System administrators"
+    }
+  }
+}

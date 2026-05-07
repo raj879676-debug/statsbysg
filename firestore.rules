@@ -1,0 +1,148 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // 0. Global Safety Net
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Allow connection test
+    match /test/connection {
+      allow get: if true;
+    }
+
+    // Phase 3: Primitives
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isVerified() {
+      return isSignedIn() && request.auth.token.email_verified == true;
+    }
+
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    function existing() {
+      return resource.data;
+    }
+    
+    // Admin check: either via email_verified + specific email for bootstrap or via an admins collection
+    function isAdmin() {
+      return isVerified() && (
+        request.auth.token.email == 'raj879676@gmail.com' ||
+        request.auth.token.email == 'statsbysg@gmail.com' ||
+        exists(/databases/$(database)/documents/admins/$(request.auth.uid))
+      );
+    }
+
+    // Phase 4: Validation Blueprints
+    
+    function isValidUser(data) {
+      return data.keys().hasAll(['updatedAt']) &&
+             data.updatedAt == request.time &&
+             (data.keys().size() >= 1 && data.keys().size() <= 3) &&
+             (!data.keys().contains('appState') || data.appState is map) &&
+             (!data.keys().contains('preferences') || data.preferences is map);
+    }
+
+    function isValidChat(data) {
+      return data.keys().hasAll(['messages', 'updatedAt']) &&
+             data.keys().size() == 2 &&
+             data.messages is list &&
+             data.messages.size() <= 1000 &&
+             data.updatedAt == request.time;
+    }
+
+    function isValidReview(data) {
+      return data.keys().hasAll(['name', 'year', 'review', 'rating', 'approved', 'createdAt']) &&
+             (data.keys().size() == 6 || (data.keys().size() == 7 && data.keys().contains('imageUrl'))) &&
+             data.name is string && data.name.size() > 0 && data.name.size() <= 100 &&
+             data.year is string && data.year.matches('^\\d{4}$') &&
+             data.review is string && data.review.size() > 0 && data.review.size() <= 2000 &&
+             data.rating is number && data.rating >= 1 && data.rating <= 5 &&
+             data.approved is bool &&
+             data.createdAt == request.time &&
+             (!data.keys().contains('imageUrl') || (data.imageUrl is string && data.imageUrl.size() <= 1000000));
+    }
+
+    function isValidContact(data) {
+      return data.keys().hasAll(['name', 'email', 'phone', 'subject', 'message', 'status', 'createdAt']) &&
+             data.keys().size() == 7 &&
+             data.name is string && data.name.size() <= 100 &&
+             data.email is string && data.email.matches('.+@.+\\..+') &&
+             data.phone is string && data.phone.size() <= 15 &&
+             data.subject is string && data.subject.size() <= 200 &&
+             data.message is string && data.message.size() <= 5000 &&
+             data.status in ['new', 'read', 'resolved'] &&
+             data.createdAt == request.time;
+    }
+
+    // Rules
+    
+    match /users/{userId} {
+      allow get: if isOwner(userId) && isValidId(userId);
+      allow create: if isOwner(userId) && isValidId(userId) && isValidUser(incoming());
+      allow update: if isOwner(userId) && isValidId(userId) && 
+                    isValidUser(incoming()) && 
+                    incoming().updatedAt == request.time &&
+                    incoming().diff(existing()).affectedKeys().hasOnly(['appState', 'preferences', 'updatedAt']);
+    }
+
+    match /chats/{userId} {
+      allow get: if isOwner(userId) && isValidId(userId);
+      allow create: if isOwner(userId) && isValidId(userId) && isValidChat(incoming());
+      allow update: if isOwner(userId) && isValidId(userId) && 
+                    isValidChat(incoming()) &&
+                    incoming().diff(existing()).affectedKeys().hasOnly(['messages', 'updatedAt']);
+    }
+
+    match /reviews/{reviewId} {
+      allow list: if resource.data.approved == true;
+      allow get: if isValidId(reviewId); // Publicly readable
+      allow create: if isValidId(reviewId) && isValidReview(incoming()) && incoming().approved == false;
+      allow update: if isAdmin() && isValidId(reviewId) && isValidReview(incoming()) &&
+                    (
+                      // Action: Approve/Moderate
+                      incoming().diff(existing()).affectedKeys().hasAny(['approved']) ||
+                      // Action: Full edit
+                      incoming().diff(existing()).affectedKeys().hasAny(['name', 'review', 'rating', 'imageUrl'])
+                    );
+      allow delete: if isAdmin() && isValidId(reviewId);
+    }
+
+    match /assetOverrides/{assetId} {
+      allow list: if resource.data.isActive == true;
+      allow get: if true;
+      allow write: if isAdmin() && isValidId(assetId);
+    }
+
+    match /announcements/{announcementId} {
+      allow list: if resource.data.isActive == true;
+      allow get: if true;
+      allow write: if isAdmin() && isValidId(announcementId);
+    }
+
+    match /contacts/{contactId} {
+      allow create: if isValidId(contactId) && isValidContact(incoming()) && incoming().status == 'new';
+      allow read: if isAdmin() && isValidId(contactId);
+      allow update: if isAdmin() && isValidId(contactId) && isValidContact(incoming()) &&
+                    incoming().diff(existing()).affectedKeys().hasOnly(['status']);
+      allow delete: if isAdmin() && isValidId(contactId);
+    }
+    
+    match /admins/{adminId} {
+      allow read: if isSignedIn() && isValidId(adminId);
+      allow write: if false; // Only manageable via console or specialized tool
+    }
+  }
+}
