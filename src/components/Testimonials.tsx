@@ -1,99 +1,88 @@
 import { useState, useRef, useEffect, memo, useMemo } from 'react';
-import { Star, Quote, ChevronLeft, ChevronRight, MessageSquarePlus } from 'lucide-react';
+import { Star, Quote, ChevronLeft, ChevronRight } from 'lucide-react';
 import { motion, useAnimationFrame, useMotionValue, animate } from 'motion/react';
-import { collection, query, where, onSnapshot, orderBy } from 'firebase/firestore';
-import { db, isFirebaseConfigured, handleFirestoreError, OperationType } from '../lib/firebase';
 import { useLanguage } from '../lib/LanguageContext';
-import ReviewModal from './ReviewModal';
 
 const staticTestimonials = [
   {
-    name: 'Sudhanshu',
-    role: 'ISS Selected Candidate',
-    text: "SG Sir's depth in Statistical Inference and Probability is unparalleled. His structured approach helped me crack the Indian Statistical Service. Truly the best mentor for ISS.",
-    image: 'https://ui-avatars.com/api/?name=Sudhanshu&background=0D8ABC&color=fff',
+    name: 'Naveen',
+    role: 'ASO Selected',
+    text: "SG Sir’s expertise in statistical theory and his simplified teaching approach were key to my ASO selection. His focus on core concepts and exam-oriented strategy made even the most complex topics easy to master.",
+    image: 'https://ui-avatars.com/api/?name=Naveen&background=eff6ff&color=111827',
     color: 'bg-blue-600',
   },
   {
-    name: 'Gyanendra',
-    role: 'IIT-JAM Statistics (AIR Top 50)',
-    text: "The way SG Sir simplifies complex mathematical concepts is amazing. The problem-solving techniques for JAM were a game-changer for me. Highly recommended!",
-    image: 'https://ui-avatars.com/api/?name=Gyanendra&background=F59E0B&color=fff',
+    name: 'Aditi',
+    role: 'ASO Selected',
+    text: "The structured guidance and high-quality content on the Statistics By SG platform helped me clear the ASO exam with confidence. I highly recommend his mentorship to anyone aiming for a professional career in statistics.",
+    image: 'https://ui-avatars.com/api/?name=Aditi&background=eff6ff&color=111827',
     color: 'bg-amber-500',
   },
   {
-    name: 'Achintiya',
-    role: 'ASO Selected candidate',
-    text: "Clear concepts and exam-oriented notes! Sir's guidance for the UPSSSC ASO exam was spot on. The bilingual explanation made every technical term easy to grasp.",
-    image: 'https://ui-avatars.com/api/?name=Achintiya&background=10B981&color=fff',
+    name: 'Aditya',
+    role: 'B.Sc. Statistics Student',
+    text: "SG Sir makes advanced statistics feel like a breeze. His explanation of complex derivations helped me top my B.Sc. exams and built a solid foundation for my future goals.",
+    image: 'https://ui-avatars.com/api/?name=Aditya&background=eff6ff&color=111827',
     color: 'bg-emerald-500',
   },
   {
-    name: 'Naveen',
-    role: 'GATE (ST) Qualified',
-    text: "If you want to master Statistics for GATE or NET, this is the place. Sir's clarity on Multivariate Analysis and Estimation is exceptional.",
-    image: 'https://ui-avatars.com/api/?name=Naveen&background=8B5CF6&color=fff',
+    name: 'Anuj',
+    role: 'B.Sc. Statistics Student',
+    text: "The best resource for any B.Sc. student! The way he connects theoretical concepts to practical applications is incredible and has completely changed how I approach the subject.",
+    image: 'https://ui-avatars.com/api/?name=Anuj&background=eff6ff&color=111827',
     color: 'bg-violet-500',
   },
   {
-    name: 'Arunima',
-    role: 'CSIR NET/JRF statistics',
-    text: "The conceptual foundation I built here helped me clear JRF in my first attempt. The motivation and constant support from SG Sir are invaluable.",
-    image: 'https://ui-avatars.com/api/?name=Arunima&background=EC4899&color=fff',
+    name: 'Sudhanshu',
+    role: 'B.Sc. Statistics Student',
+    text: "I was struggling with time series and stationarity until I found SG Sir. His teaching is precise, easy to follow, and perfectly aligned with our university syllabus.",
+    image: 'https://ui-avatars.com/api/?name=Sudhanshu&background=eff6ff&color=111827',
     color: 'bg-pink-500',
   },
   {
-    name: 'Amitesh',
-    role: 'University Topper & MSc Scholar',
-    text: "Sir's classes were the key to my academic success. He doesn't just teach for exams, he makes you fall in love with the subject of Statistics.",
-    image: 'https://ui-avatars.com/api/?name=Amitesh&background=3B82F6&color=fff',
+    name: 'Asif',
+    role: 'B.Sc. Statistics Student',
+    text: "As a B.A. student, I was initially intimidated by the math, but SG Sir breaks everything down into logical steps. His sessions are a must-watch for anyone wanting to master the subject.",
+    image: 'https://ui-avatars.com/api/?name=Asif&background=eff6ff&color=111827',
     color: 'bg-blue-500',
+  },
+  {
+    name: 'Krishna Kant',
+    role: 'B.A. Statistics Student',
+    text: "The clarity SG Sir provides is unmatched. He simplifies even the toughest statistical theories, making them accessible and interesting for students from all backgrounds.",
+    image: 'https://ui-avatars.com/api/?name=Krishna+Kant&background=eff6ff&color=111827',
+    color: 'bg-slate-600',
+  },
+  {
+    name: 'Aniket',
+    role: 'B.Sc. & IIT-JAM',
+    text: "SG Sir’s approach to IIT-JAM preparation is a total game-changer. He simplifies high-level derivations and statistical inference so well that even the most daunting B.Sc. topics become easy to score in.",
+    image: 'https://ui-avatars.com/api/?name=Aniket&background=eff6ff&color=111827',
+    color: 'bg-indigo-500',
+  },
+  {
+    name: 'Arunima',
+    role: 'B.Sc. & IIT-JAM',
+    text: "I cleared my concepts and gained immense confidence for the IIT-JAM thanks to this mentorship. The way SG Sir links our B.Sc. syllabus to competitive exam patterns is exactly what every aspirant needs.",
+    image: 'https://ui-avatars.com/api/?name=Arunima&background=eff6ff&color=111827',
+    color: 'bg-rose-500',
+  },
+  {
+    name: 'Amitesh',
+    role: 'B.Sc. & IIT-JAM',
+    text: "From basic B.Sc. theory to cracking tough IIT-JAM problems, SG Sir’s guidance is flawless. His focus on logic rather than just formulas helped me master the subject and improve my rank significantly.",
+    image: 'https://ui-avatars.com/api/?name=Amitesh&background=eff6ff&color=111827',
+    color: 'bg-cyan-500',
   }
 ];
 
 const Testimonials = memo(() => {
   const { t } = useLanguage();
   const [isPaused, setIsPaused] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [dynamicTestimonials, setDynamicTestimonials] = useState<any[]>([]);
   const isDragging = useRef(false);
   const x = useMotionValue(0);
 
-  const testimonials = useMemo(() => 
-    [...staticTestimonials, ...dynamicTestimonials].slice(0, 50),
-    [dynamicTestimonials]
-  );
-
-  useEffect(() => {
-    if (!isFirebaseConfigured || !db) return;
-
-    const path = 'reviews';
-    try {
-      const q = query(
-        collection(db, path),
-        where('approved', '==', true),
-        orderBy('createdAt', 'desc')
-      );
-
-      const unsubscribe = onSnapshot(q, (snapshot) => {
-        const reviews = snapshot.docs.map(doc => ({
-          id: doc.id,
-          name: doc.data().name,
-          role: `Student (Batch ${doc.data().year})`,
-          text: doc.data().review,
-          image: doc.data().imageUrl,
-          color: 'bg-blue-500'
-        }));
-        setDynamicTestimonials(reviews);
-      }, (error) => {
-        handleFirestoreError(error, OperationType.GET, path);
-      });
-
-      return () => unsubscribe();
-    } catch (error) {
-      handleFirestoreError(error, OperationType.GET, path);
-    }
-  }, []);
+  const testimonials = useMemo(() => staticTestimonials, []);
 
   // Auto-scroll logic
   useAnimationFrame((_, delta) => {
@@ -141,16 +130,6 @@ const Testimonials = memo(() => {
         <p className="text-slate-300 text-base md:text-xl font-medium max-w-3xl mx-auto mb-8 md:mb-10 leading-relaxed">
           {t('testimonials_subtitle')}
         </p>
-        
-        <motion.button
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          onClick={() => setIsModalOpen(true)}
-          className="inline-flex items-center gap-3 px-6 py-3 bg-white text-slate-900 rounded-full font-black uppercase tracking-widest text-[10px] shadow-xl hover:bg-blue-50 transition-all border-2 border-blue-500/10"
-        >
-          <MessageSquarePlus size={18} className="text-blue-500" />
-          {t('share_review')}
-        </motion.button>
       </div>
 
       <div className="px-4">
@@ -237,8 +216,6 @@ const Testimonials = memo(() => {
           <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
         </button>
       </div>
-
-      <ReviewModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </section>
   );
 });
