@@ -26,7 +26,7 @@ const About = memo(() => {
             className="relative"
           >
             <div className="absolute inset-0 bg-blue-500/10 rounded-[3rem] blur-3xl -z-10" />
-            <div className="relative z-10 rounded-3xl overflow-hidden shadow-2xl border-4 border-slate-100 bg-slate-50">
+            <div className="relative z-10 rounded-3xl overflow-hidden shadow-2xl border-4 border-slate-200 bg-slate-100">
               <img 
                 src={overrides['about_image']?.url || "https://lh3.googleusercontent.com/d/1qWmTdNXHKjykMQw6fTY4eCUkGzvohNYa"}
                 alt="SG Sir - Statistics Learning Hub"
@@ -43,7 +43,7 @@ const About = memo(() => {
               />
             </div>
             {/* Statistics Badge Overlay */}
-            <div className="absolute -bottom-6 -right-6 bg-slate-50 p-4 rounded-2xl shadow-xl z-20 border border-slate-200 hidden sm:block">
+            <div className="absolute -bottom-6 -right-6 bg-slate-100 p-4 rounded-2xl shadow-xl z-20 border border-slate-300 hidden sm:block">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center text-white">
                   <Star size={20} className="fill-current" />

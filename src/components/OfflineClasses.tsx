@@ -212,7 +212,7 @@ export default function OfflineClasses({ onNavigate }: OfflineClassesProps) {
               initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              className="mb-6 sm:mb-10 rounded-2xl sm:rounded-3xl overflow-hidden shadow-lg border-2 sm:border-4 border-white aspect-[4/3] sm:aspect-video relative group"
+              className="mb-6 sm:mb-10 rounded-2xl sm:rounded-3xl overflow-hidden shadow-lg border-2 sm:border-4 border-slate-50 aspect-[4/3] sm:aspect-video relative group"
             >
               <img 
                 src="https://lh3.googleusercontent.com/d/1Sr8m-x6gKs8C3P5x8wIEAZickjviYqSx" 
@@ -228,7 +228,7 @@ export default function OfflineClasses({ onNavigate }: OfflineClassesProps) {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-12">
               <div className="flex items-start gap-4">
-                <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center text-violet-600 shadow-xl shadow-violet-500/5 border border-violet-50 shrink-0">
+                <div className="w-12 h-12 bg-slate-100 rounded-2xl flex items-center justify-center text-violet-600 shadow-xl shadow-violet-500/5 border border-slate-200 shrink-0">
                   <Users size={24} />
                 </div>
                 <div>
@@ -237,7 +237,7 @@ export default function OfflineClasses({ onNavigate }: OfflineClassesProps) {
                 </div>
               </div>
               <div className="flex items-start gap-4">
-                <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center text-violet-600 shadow-xl shadow-violet-500/5 border border-violet-50 shrink-0">
+                <div className="w-12 h-12 bg-slate-100 rounded-2xl flex items-center justify-center text-violet-600 shadow-xl shadow-violet-500/5 border border-slate-200 shrink-0">
                   <GraduationCap size={24} />
                 </div>
                 <div>

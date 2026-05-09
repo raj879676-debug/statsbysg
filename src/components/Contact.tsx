@@ -139,7 +139,7 @@ export default function Contact() {
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="bg-white p-10 md:p-14 rounded-[3rem] shadow-2xl border border-blue-50 relative overflow-hidden"
+            className="bg-slate-50 p-10 md:p-14 rounded-[3rem] shadow-2xl border border-blue-100 relative overflow-hidden"
           >
             <div className="absolute top-0 right-0 w-40 h-40 bg-blue-50/50 rounded-full translate-x-20 -translate-y-20 blur-3xl opacity-50" />
             
@@ -152,7 +152,7 @@ export default function Contact() {
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     placeholder={t('form_name_placeholder')}
-                    className={`w-full px-6 py-4 rounded-2xl border ${errors.name ? 'border-red-500 bg-red-50/10 text-red-900' : 'border-slate-100 bg-slate-50/80'} focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all text-sm font-bold placeholder:text-slate-400 shadow-sm`}
+                    className={`w-full px-6 py-4 rounded-2xl border ${errors.name ? 'border-red-500 bg-red-50/10 text-red-900' : 'border-slate-200 bg-slate-100/80'} focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all text-sm font-bold placeholder:text-slate-400 shadow-sm`}
                   />
                   {errors.name && <p className="mt-1.5 text-[10px] text-red-600 font-bold uppercase tracking-wider flex items-center gap-1 ml-2"><AlertCircle size={10} /> {errors.name}</p>}
                 </div>
@@ -173,7 +173,7 @@ export default function Contact() {
                         }
                       }}
                       placeholder="00000 00000"
-                      className={`w-full pl-20 pr-6 py-4 rounded-2xl border ${errors.phone ? 'border-red-500 bg-red-50/10 text-red-900' : 'border-slate-100 bg-slate-50/50'} focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all text-sm font-black tracking-[0.1em] placeholder:text-slate-400`}
+                      className={`w-full pl-20 pr-6 py-4 rounded-2xl border ${errors.phone ? 'border-red-500 bg-red-50/10 text-red-900' : 'border-slate-200 bg-slate-100/50'} focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all text-sm font-black tracking-[0.1em] placeholder:text-slate-400`}
                     />
                   </div>
                   {errors.phone && <p className="mt-1.5 text-[10px] text-red-600 font-bold uppercase tracking-wider flex items-center gap-1 ml-2"><AlertCircle size={10} /> {errors.phone}</p>}
@@ -187,7 +187,7 @@ export default function Contact() {
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                   placeholder="name@gmail.com"
-                  className={`w-full px-6 py-4 rounded-2xl border ${errors.email ? 'border-red-500 bg-red-50/10 text-red-900' : 'border-slate-100 bg-slate-50/50'} focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all text-sm font-bold placeholder:text-slate-400`}
+                  className={`w-full px-6 py-4 rounded-2xl border ${errors.email ? 'border-red-500 bg-red-50/10 text-red-900' : 'border-slate-200 bg-slate-100/50'} focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all text-sm font-bold placeholder:text-slate-400`}
                 />
                 {errors.email && <p className="mt-1.5 text-[10px] text-red-600 font-bold uppercase tracking-wider flex items-center gap-1 ml-2"><AlertCircle size={10} /> {errors.email}</p>}
               </div>
@@ -198,7 +198,7 @@ export default function Contact() {
                   <select 
                     value={formData.subject}
                     onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                    className={`w-full px-6 py-4 rounded-2xl border ${errors.subject ? 'border-red-500 bg-red-50/10 text-red-900' : 'border-slate-100 bg-slate-50/50'} focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all text-sm font-bold appearance-none cursor-pointer placeholder:text-slate-400`}
+                    className={`w-full px-6 py-4 rounded-2xl border ${errors.subject ? 'border-red-500 bg-red-50/10 text-red-900' : 'border-slate-200 bg-slate-100/50'} focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all text-sm font-bold appearance-none cursor-pointer placeholder:text-slate-400`}
                   >
                     <option value="" disabled className="text-slate-400">{t('form_subject_select')}</option>
                     <option value="General Inquiry">General Inquiry</option>
@@ -223,7 +223,7 @@ export default function Contact() {
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                   placeholder={t('form_message_placeholder')}
-                  className={`w-full px-6 py-4 rounded-2xl border ${errors.message ? 'border-red-500 bg-red-50/10 text-red-900' : 'border-slate-100 bg-slate-50/50'} focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all text-sm font-bold resize-none placeholder:text-slate-400`}
+                  className={`w-full px-6 py-4 rounded-2xl border ${errors.message ? 'border-red-500 bg-red-50/10 text-red-900' : 'border-slate-200 bg-slate-100/50'} focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all text-sm font-bold resize-none placeholder:text-slate-400`}
                 ></textarea>
                 {errors.message && <p className="mt-1.5 text-[10px] text-red-600 font-bold uppercase tracking-wider flex items-center gap-1 ml-2"><AlertCircle size={10} /> {errors.message}</p>}
               </div>
@@ -307,7 +307,7 @@ export default function Contact() {
                   key={idx}
                   href={item.href}
                   whileHover={{ y: -5 }}
-                  className="bg-white p-8 rounded-[2rem] border border-slate-100 flex flex-col gap-6 group hover:border-blue-500 transition-all shadow-xl shadow-slate-200/20 relative overflow-hidden"
+                  className="bg-slate-50 p-8 rounded-[2rem] border border-slate-200 flex flex-col gap-6 group hover:border-blue-500 transition-all shadow-xl shadow-slate-300/20 relative overflow-hidden"
                 >
                   <div className={`w-14 h-14 rounded-2xl flex items-center justify-center ${item.color} group-hover:scale-110 transition-transform`}>
                     {item.icon}
@@ -320,7 +320,7 @@ export default function Contact() {
               ))}
             </div>
 
-            <div className="bg-white p-3 rounded-[3rem] shadow-2xl border border-slate-100 overflow-hidden aspect-video relative group">
+            <div className="bg-slate-50 p-3 rounded-[3rem] shadow-2xl border border-slate-200 overflow-hidden aspect-video relative group">
                <iframe 
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3558.9979954634!2d80.93691667522288!3d26.871804776671674!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399bfd2c34096d99%3A0x138ee07fb9051a9f!2sSAMPOORNA%20LIBRARY%20AND%20CLASSES!5e0!3m2!1sen!2sin!4v1777570094434!5m2!1sen!2sin" 
                 width="100%" 

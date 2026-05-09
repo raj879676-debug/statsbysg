@@ -20,7 +20,7 @@ const Refund = lazy(() => import('./components/Refund'));
 const ClassroomPage = lazy(() => import('./components/ClassroomPage'));
 
 const PageLoader = () => (
-  <div className="min-h-screen flex items-center justify-center bg-slate-50">
+  <div className="min-h-screen flex items-center justify-center bg-slate-100">
     <Loader2 className="w-10 h-10 text-brand-600 animate-spin" />
   </div>
 );

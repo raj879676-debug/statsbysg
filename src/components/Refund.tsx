@@ -23,7 +23,7 @@ export default function Refund({ onBack }: { onBack: () => void }) {
       </nav>
 
       <div className="max-w-3xl mx-auto px-6 py-12">
-        <div className="bg-slate-50 p-8 md:p-12 rounded-[2.5rem] shadow-xl border border-slate-100">
+        <div className="bg-slate-100 p-8 md:p-12 rounded-[2.5rem] shadow-xl border border-slate-200">
           <h1 className="text-4xl font-black text-brand-dark mb-8">Refund Policy</h1>
           
           <div className="prose prose-slate max-w-none text-slate-600 space-y-6">
