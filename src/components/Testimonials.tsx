@@ -123,11 +123,11 @@ const Testimonials = memo(() => {
 
   return (
     <section id="reviews" className="pt-4 pb-4 md:pt-6 md:pb-6 bg-transparent overflow-hidden relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-6 md:mb-10 relative z-10 py-0">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-6 md:mb-10 relative z-10 py-12 bg-slate-950/95 backdrop-blur-2xl rounded-[2.5rem] border border-white/10 shadow-2xl">
         <h2 className="text-3xl sm:text-5xl lg:text-7xl font-black text-white mb-6 md:mb-8 leading-[1.1] tracking-tight">
           {t('testimonials_title')}
         </h2>
-        <p className="text-slate-300 text-base md:text-xl font-medium max-w-3xl mx-auto mb-8 md:mb-10 leading-relaxed">
+        <p className="text-slate-300 text-base md:text-xl font-medium max-w-3xl mx-auto leading-relaxed">
           {t('testimonials_subtitle')}
         </p>
       </div>
