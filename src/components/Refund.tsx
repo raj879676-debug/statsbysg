@@ -6,15 +6,15 @@ import Footer from './Footer';
 export default function Refund({ onBack }: { onBack: () => void }) {
   const { t } = useLanguage();
   return (
-    <div className="min-h-screen bg-slate-50">
-      <nav className="bg-slate-50 border-b border-slate-100 py-4 mb-12 sticky top-0 z-50">
+    <div className="min-h-screen bg-transparent">
+      <nav className="bg-slate-900/80 backdrop-blur-xl border-b border-white/5 py-4 mb-12 sticky top-0 z-50">
         <div className="max-w-4xl mx-auto px-6 flex justify-between items-center">
           <button onClick={onBack} className="cursor-pointer">
             <Logo />
           </button>
           <button 
             onClick={onBack}
-            className="flex items-center gap-2 px-4 py-2 bg-brand-600 text-white hover:bg-brand-700 text-sm font-bold rounded-xl transition-all shadow-lg shadow-brand-500/20"
+            className="flex items-center gap-2 px-4 py-2 bg-slate-800 text-amber-400 hover:text-amber-300 border border-white/10 rounded-xl transition-all shadow-lg shadow-amber-500/10 font-bold"
           >
             <Home size={18} />
             {t('back_to_home')}

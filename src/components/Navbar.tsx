@@ -28,7 +28,7 @@ const Navbar = memo(() => {
   ], [t]);
 
   return (
-    <nav className={`sticky top-0 w-full z-50 transition-all duration-300 ${scrolled ? 'glass-nav py-2' : 'bg-slate-50 py-4'}`}>
+    <nav className={`sticky top-0 w-full z-50 transition-all duration-300 ${scrolled ? 'glass-nav py-2' : 'bg-transparent py-4'}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16 items-center">
           <div className="flex items-center flex-shrink-0">

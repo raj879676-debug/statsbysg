@@ -57,7 +57,7 @@ const ScrollControls = ({ currentPage, onBack }: ScrollControlsProps) => {
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             onClick={handleBack}
-            className="w-10 h-10 md:w-14 md:h-14 bg-slate-900 border border-slate-800 rounded-full flex items-center justify-center text-white shadow-2xl hover:bg-black transition-all"
+            className="w-10 h-10 md:w-14 md:h-14 bg-slate-900 border border-white/10 rounded-2xl flex items-center justify-center text-blue-400 shadow-2xl hover:bg-slate-800 hover:text-blue-300 transition-all"
             title="Go Back"
           >
             <ArrowLeft size={22} className="md:w-6 md:h-6" />

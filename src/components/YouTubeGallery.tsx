@@ -6,9 +6,14 @@ import { useLanguage } from '../lib/LanguageContext';
 const CHANNEL_ID = 'UCclW-5T05M0H8L1F3841Y64Q';
 const FALLBACK_VIDEOS = [
   { id: 'O3a_-7KkcyM', title: 'Statistics Masterclass 1' },
-  { id: 'BIXEd6upzFk', title: 'Statistics Masterclass 2' },
-  { id: 'tIUTZLAyS-M', title: 'Statistics Masterclass 3' },
+  { id: 'tIUTZLAyS-M', title: 'Statistics Masterclass 2' },
+  { id: 'BIXEd6upzFk', title: 'Statistics Masterclass 3' },
   { id: 'oDe6sqAvaMA', title: 'Statistics Masterclass 4' },
+  { id: 'Qtr8K2lZAe8', title: 'Statistics Masterclass 5' },
+  { id: 'L6RsWLFi6Xc', title: 'Statistics Masterclass 6' },
+  { id: 'opp-ODrw49o', title: 'Statistics Masterclass 7' },
+  { id: 'mT0AbvXjVao', title: 'Statistics Masterclass 8' },
+  { id: 'WWnHd_tJH6E', title: 'Statistics Masterclass 9' },
 ];
 
 interface YouTubeVideo {

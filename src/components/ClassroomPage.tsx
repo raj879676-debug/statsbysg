@@ -331,29 +331,29 @@ Question: ${form.question}`;
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 font-sans selection:bg-brand-100 selection:text-brand-900 pt-20 md:pt-32 pb-12 md:pb-20">
+    <div className="min-h-screen bg-transparent font-sans selection:bg-brand-100 selection:text-brand-900 pt-20 md:pt-32 pb-12 md:pb-20">
       {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-xl border-b border-slate-100 shadow-sm">
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-slate-900/80 backdrop-blur-xl border-b border-white/5 shadow-2xl">
         <div className="max-w-7xl mx-auto px-4 md:px-10 lg:px-16 h-16 md:h-20 flex items-center justify-between">
           <div className="flex items-center gap-2 md:gap-4">
             <button 
               onClick={view === 'initial' ? onBack : () => handleViewChange('initial')}
-              className="flex items-center gap-2 text-slate-900 font-black uppercase tracking-widest text-[9px] hover:text-brand-600 transition-colors group"
+              className="flex items-center gap-2 text-blue-400 font-black uppercase tracking-widest text-[9px] hover:text-blue-300 transition-colors group"
             >
-              <div className="w-7 h-7 md:w-8 md:h-8 rounded-full border border-slate-200 flex items-center justify-center group-hover:border-brand-500 transition-colors bg-white">
-                <ArrowLeft size={12} className="group-hover:-translate-x-0.5 transition-transform" />
+              <div className="w-8 h-8 md:w-10 md:h-10 rounded-xl border border-white/10 flex items-center justify-center group-hover:border-blue-500/50 transition-colors bg-slate-800 shadow-lg">
+                <ArrowLeft size={14} className="group-hover:-translate-x-0.5 transition-transform" />
               </div>
               <span className="hidden xs:block">{view === 'initial' ? 'Exit' : 'Back'}</span>
             </button>
             
             <button 
               onClick={onBack}
-              className="flex items-center gap-2 text-slate-400 font-black uppercase tracking-widest text-[9px] hover:text-slate-900 transition-colors group"
+              className="flex items-center gap-2 text-amber-400 font-black uppercase tracking-widest text-[9px] hover:text-amber-300 transition-colors group"
             >
-              <div className="w-7 h-7 md:w-8 md:h-8 rounded-full border border-slate-100 flex items-center justify-center group-hover:border-slate-300 transition-colors">
-                <HomeIcon size={12} />
+              <div className="w-8 h-8 md:w-10 md:h-10 rounded-xl border border-white/10 flex items-center justify-center group-hover:border-amber-500/50 transition-colors bg-slate-800 shadow-lg">
+                <HomeIcon size={14} />
               </div>
-              <span className="hidden xs:block text-slate-400 group-hover:text-slate-900">Home</span>
+              <span className="hidden xs:block">Home</span>
             </button>
           </div>
 
