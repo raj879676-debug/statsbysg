@@ -23,8 +23,16 @@ interface YouTubeVideo {
 
 const YouTubeGallery = memo(() => {
   const { t } = useLanguage();
-  const [videos, setVideos] = useState<YouTubeVideo[]>(FALLBACK_VIDEOS);
-  const [isLoading, setIsLoading] = useState(true);
+  const [videos, setVideos] = useState<YouTubeVideo[]>(() => {
+    if (typeof window !== 'undefined') {
+      const cached = localStorage.getItem('youtube_cache');
+      try {
+        if (cached) return JSON.parse(cached).videos;
+      } catch (e) {}
+    }
+    return FALLBACK_VIDEOS;
+  });
+  const [isLoading, setIsLoading] = useState(false);
   const [activeVideoId, setActiveVideoId] = useState<string | null>(null);
   const [isPaused, setIsPaused] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -34,23 +42,22 @@ const YouTubeGallery = memo(() => {
 
   useEffect(() => {
     const fetchVideos = async () => {
-      // Check cache first in localStorage with 12h expiration
       const cachedData = localStorage.getItem('youtube_cache');
-      const now = new Date().getTime();
-      const CACHE_TIME = 12 * 60 * 60 * 1000;
+      const now = Date.now();
+      const CACHE_TIME = 24 * 60 * 60 * 1000; // Extend to 24h
 
       if (cachedData) {
         try {
-          const { videos: cachedVideos, timestamp } = JSON.parse(cachedData);
+          const { timestamp } = JSON.parse(cachedData);
+          // If cache is less than 24h old, don't even attempt fetch
           if (now - timestamp < CACHE_TIME) {
-            setVideos(cachedVideos);
-            setIsLoading(false);
             return;
           }
-        } catch (e) {
-          console.error("Cache error", e);
-        }
+        } catch (e) {}
       }
+
+      // If we got here, we need to fetch
+      // But we don't set isLoading to true because we already have fallback/cached videos
 
       const rssUrl = `https://www.youtube.com/feeds/videos.xml?channel_id=${CHANNEL_ID}`;
       
