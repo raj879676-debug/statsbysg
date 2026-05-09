@@ -69,7 +69,7 @@ export default function OfflineClasses({ onNavigate }: OfflineClassesProps) {
   };
 
   return (
-    <section id="offline-center" className="pt-8 md:pt-0 pb-[10px] bg-slate-50 relative overflow-hidden">
+    <section id="offline-center" className="pt-8 md:pt-0 pb-[10px] bg-transparent relative overflow-hidden">
       {/* Interactive Modal */}
       <AnimatePresence>
         {currentIndex !== null && (

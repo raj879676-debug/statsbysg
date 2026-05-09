@@ -15,7 +15,12 @@
   --color-accent-green: #10b981;
   --color-accent-light: #d1fae5;
   
-  --drop-shadow-glow: 0 0 20px rgba(255, 255, 255, 0.4);
+  --color-page-bg: #f8fafc; /* SLATE-50 / Cleaner background */
+  --color-card-bg: #ffffff; /* White card contrast */
+  --color-highlight-bg: rgba(239, 246, 255, 0.5); /* Blue-50/50 for highlights */
+  --color-highlight-border: rgba(191, 219, 254, 0.5); /* Blue-200/50 for borders */
+  
+  --drop-shadow-glow: 0 0 20px rgba(0, 0, 0, 0.1);
 }
 
 body.video-playing .floating-control {
@@ -30,8 +35,9 @@ html {
 
 @layer base {
   body {
-    @apply font-sans bg-slate-50 text-slate-800 antialiased selection:bg-blue-100 selection:text-blue-900 overflow-x-hidden;
+    @apply font-sans bg-slate-100 text-slate-800 antialiased selection:bg-blue-100 selection:text-blue-900 overflow-x-hidden;
     min-height: 100vh;
+    background-color: var(--color-page-bg);
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -52,7 +58,7 @@ section {
 
 
 .glass-nav {
-  @apply bg-white/95 backdrop-blur-md border-b border-slate-100;
+  @apply bg-slate-50/95 backdrop-blur-md border-b border-slate-200/50;
 }
 
 @layer utilities {

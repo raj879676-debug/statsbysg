@@ -7,7 +7,7 @@ export default function Refund({ onBack }: { onBack: () => void }) {
   const { t } = useLanguage();
   return (
     <div className="min-h-screen bg-slate-50">
-      <nav className="bg-white border-b border-slate-100 py-4 mb-12 sticky top-0 z-50">
+      <nav className="bg-slate-50 border-b border-slate-100 py-4 mb-12 sticky top-0 z-50">
         <div className="max-w-4xl mx-auto px-6 flex justify-between items-center">
           <button onClick={onBack} className="cursor-pointer">
             <Logo />
@@ -23,7 +23,7 @@ export default function Refund({ onBack }: { onBack: () => void }) {
       </nav>
 
       <div className="max-w-3xl mx-auto px-6 py-12">
-        <div className="bg-white p-8 md:p-12 rounded-[2.5rem] shadow-xl border border-slate-100">
+        <div className="bg-slate-50 p-8 md:p-12 rounded-[2.5rem] shadow-xl border border-slate-100">
           <h1 className="text-4xl font-black text-brand-dark mb-8">Refund Policy</h1>
           
           <div className="prose prose-slate max-w-none text-slate-600 space-y-6">

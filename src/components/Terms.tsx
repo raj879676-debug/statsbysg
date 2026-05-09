@@ -6,8 +6,8 @@ import Footer from './Footer';
 export default function Terms({ onBack }: { onBack: () => void }) {
   const { t } = useLanguage();
   return (
-    <div className="min-h-screen bg-white">
-      <nav className="bg-white border-b border-slate-100 py-4 mb-12 sticky top-0 z-50">
+    <div className="min-h-screen bg-slate-50">
+      <nav className="bg-slate-50 border-b border-slate-100 py-4 mb-12 sticky top-0 z-50">
         <div className="max-w-4xl mx-auto px-6 flex justify-between items-center">
           <button onClick={onBack} className="cursor-pointer">
             <Logo />

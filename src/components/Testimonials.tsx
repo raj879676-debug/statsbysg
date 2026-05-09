@@ -41,7 +41,7 @@ const staticTestimonials = [
   },
   {
     name: 'Asif',
-    role: 'B.Sc. Statistics Student',
+    role: 'B.A. Statistics Student',
     text: "As a B.A. student, I was initially intimidated by the math, but SG Sir breaks everything down into logical steps. His sessions are a must-watch for anyone wanting to master the subject.",
     image: 'https://ui-avatars.com/api/?name=Asif&background=eff6ff&color=111827',
     color: 'bg-blue-500',
@@ -122,7 +122,7 @@ const Testimonials = memo(() => {
   };
 
   return (
-    <section id="reviews" className="pt-4 pb-4 md:pt-6 md:pb-6 bg-brand-dark overflow-hidden relative">
+    <section id="reviews" className="pt-4 pb-4 md:pt-6 md:pb-6 bg-transparent overflow-hidden relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-6 md:mb-10 relative z-10 py-0">
         <h2 className="text-3xl sm:text-5xl lg:text-7xl font-black text-white mb-6 md:mb-8 leading-[1.1] tracking-tight">
           {t('testimonials_title')}
@@ -157,9 +157,9 @@ const Testimonials = memo(() => {
             <motion.div
               key={idx}
               whileHover={{ y: -5, scale: 1.01 }}
-              className="bg-white p-6 rounded-2xl w-[280px] md:w-[320px] flex-shrink-0 whitespace-normal shadow-xl relative flex flex-col group"
+              className="bg-white p-6 rounded-2xl w-[280px] md:w-[320px] flex-shrink-0 whitespace-normal shadow-xl border border-blue-100 flex flex-col group relative"
             >
-              <div className="absolute -top-3 -right-3 w-10 h-10 bg-blue-500 rounded-xl flex items-center justify-center text-white shadow-lg rotate-12 group-hover:rotate-0 transition-transform">
+              <div className="absolute -top-3 -right-3 w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center text-white shadow-lg rotate-12 group-hover:rotate-0 transition-transform">
                 <Quote size={18} fill="currentColor" />
               </div>
 

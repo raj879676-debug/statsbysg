@@ -59,13 +59,13 @@ export default function Announcement() {
         <motion.div 
           animate={{ 
             background: [
-              'linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #1e1b4b 100%)',
-              'linear-gradient(135deg, #4338ca 0%, #1e1b4b 50%, #4338ca 100%)',
-              'linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #1e1b4b 100%)',
+              'rgba(30, 27, 75, 0.9)',
+              'rgba(67, 56, 202, 0.9)',
+              'rgba(30, 27, 75, 0.9)',
             ]
           }}
           transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-          className="absolute inset-0 z-0"
+          className="absolute inset-0 z-0 backdrop-blur-sm"
         />
 
         {/* Mesh Pattern Overlay */}

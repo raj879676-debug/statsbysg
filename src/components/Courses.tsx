@@ -150,7 +150,7 @@ const Courses = memo(() => {
   const prevSlide = () => handleManualScroll('left');
 
   return (
-    <section id="courses" className="pt-4 md:pt-[10px] pb-8 md:pb-10 bg-slate-50 overflow-hidden">
+    <section id="courses" className="pt-4 md:pt-[10px] pb-8 md:pb-10 bg-transparent overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div 
           initial={{ opacity: 0, y: 10 }}
@@ -177,10 +177,10 @@ const Courses = memo(() => {
               href="https://play.google.com/store/apps/details?id=co.khal.gdifh" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-4 px-6 py-3 bg-blue-50 text-blue-600 font-bold rounded-2xl hover:bg-blue-100 transition-all border border-blue-100 group shadow-sm"
+              className="inline-flex items-center gap-4 px-6 py-3 bg-white text-blue-600 font-bold rounded-2xl hover:bg-blue-50 transition-all border border-blue-100 group shadow-sm"
             >
 
-              <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center p-1 shadow-sm group-hover:scale-110 transition-transform overflow-hidden">
+              <div className="w-8 h-8 bg-slate-50 rounded-lg flex items-center justify-center p-1 shadow-sm group-hover:scale-110 transition-transform overflow-hidden">
                 <Logo hideText={true} size="w-full h-full" />
               </div>
               {t('explore_app')} 
@@ -238,7 +238,7 @@ const Courses = memo(() => {
                 >
                   <motion.div
                     whileHover={{ y: -5 }}
-                    className="h-full bg-white p-5 sm:p-6 rounded-[1.5rem] border-2 border-transparent transition-all duration-300 hover:border-blue-500 hover:shadow-xl flex flex-col scale-100"
+                    className="h-full bg-white p-5 sm:p-6 rounded-[1.5rem] border-2 border-transparent transition-all duration-300 hover:border-blue-500 hover:shadow-xl flex flex-col scale-100 shadow-sm"
                   >
                     <div className="flex justify-between items-start mb-3">
                       <div className="w-11 h-11 bg-blue-50 rounded-xl flex items-center justify-center group-hover:bg-blue-600 group-hover:text-white transition-colors duration-300">

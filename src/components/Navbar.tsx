@@ -2,6 +2,7 @@ import { useState, useEffect, memo, useMemo } from 'react';
 import { Menu, X, Download } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { useLanguage } from '../lib/LanguageContext';
+import { STAT_SYMBOLS } from '../constants';
 
 import Logo from './Logo';
 
@@ -27,7 +28,7 @@ const Navbar = memo(() => {
   ], [t]);
 
   return (
-    <nav className={`sticky top-0 w-full z-50 transition-all duration-300 ${scrolled ? 'glass-nav py-2' : 'bg-white py-4'}`}>
+    <nav className={`sticky top-0 w-full z-50 transition-all duration-300 ${scrolled ? 'glass-nav py-2' : 'bg-slate-50 py-4'}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16 items-center">
           <div className="flex items-center flex-shrink-0">
@@ -41,33 +42,38 @@ const Navbar = memo(() => {
               <a
                 key={link.name}
                 href={link.href}
-                className="text-sm font-semibold text-slate-600 hover:text-blue-600 transition-colors"
+                className="text-sm font-semibold text-slate-600 hover:text-blue-600 transition-colors flex items-center gap-1 group"
                 target={link.href.startsWith('http') ? '_blank' : undefined}
                 rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
               >
                 {link.name}
+                <div className="text-[10px] opacity-0 group-hover:opacity-100 transition-opacity font-serif font-black text-slate-900 border border-slate-200 px-1 rounded bg-slate-100">
+                  {STAT_SYMBOLS[link.name.length % STAT_SYMBOLS.length]}
+                </div>
               </a>
             ))}
 
             <div className="h-6 w-px bg-slate-200" />
 
-            <a
-              href="https://play.google.com/store/apps/details?id=co.khal.gdifh"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2.5 rounded-xl font-bold text-sm transition-all shadow-lg shadow-blue-500/25 flex items-center gap-2"
-            >
-              <Download size={18} />
-              {t('download_app')}
-            </a>
+            <div className="flex items-center gap-2">
+              <a
+                href="https://play.google.com/store/apps/details?id=co.khal.gdifh"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2.5 rounded-xl font-bold text-sm transition-all shadow-lg shadow-blue-500/25 flex items-center gap-2"
+              >
+                <Download size={18} />
+                {t('download_app')}
+              </a>
+            </div>
           </div>
 
-          <div className="lg:hidden flex items-center gap-4">
+          <div className="lg:hidden flex items-center gap-2">
             <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="text-slate-800 hover:text-blue-600 focus:outline-none p-2"
+               onClick={() => setIsOpen(!isOpen)}
+               className="text-slate-950 hover:text-blue-700 focus:outline-none w-10 h-10 flex items-center justify-center relative bg-slate-200 rounded-xl border border-slate-400 shadow-inner hover:bg-slate-300 transition-colors"
             >
-              {isOpen ? <X size={28} /> : <Menu size={28} />}
+              {isOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
           </div>
         </div>
@@ -79,7 +85,7 @@ const Navbar = memo(() => {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="lg:hidden bg-white border-t border-slate-100 shadow-xl absolute w-full left-0 z-50 overflow-hidden"
+            className="lg:hidden bg-slate-100/95 backdrop-blur-md border-t border-slate-200 shadow-xl absolute w-full left-0 z-50 overflow-hidden"
           >
             <div className="flex flex-col py-4">
               {navLinks.map((link) => (

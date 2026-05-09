@@ -112,7 +112,7 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="pt-6 md:pt-10 pb-8 md:pb-12 bg-slate-50 border-t border-slate-200">
+    <section id="contact" className="pt-6 md:pt-10 pb-8 md:pb-12 bg-transparent border-t border-slate-400/20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto mb-8 md:mb-12">
           <motion.h2 
@@ -139,9 +139,9 @@ export default function Contact() {
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="bg-white p-10 md:p-14 rounded-[3rem] shadow-2xl shadow-slate-200/60 border border-slate-100 relative overflow-hidden"
+            className="bg-white p-10 md:p-14 rounded-[3rem] shadow-2xl border border-blue-50 relative overflow-hidden"
           >
-            <div className="absolute top-0 right-0 w-40 h-40 bg-brand-50 rounded-full translate-x-20 -translate-y-20 blur-3xl opacity-50" />
+            <div className="absolute top-0 right-0 w-40 h-40 bg-blue-50/50 rounded-full translate-x-20 -translate-y-20 blur-3xl opacity-50" />
             
             <form onSubmit={(e) => handleSubmit(e, 'standard')} className="relative z-10 space-y-8">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
@@ -152,7 +152,7 @@ export default function Contact() {
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     placeholder={t('form_name_placeholder')}
-                    className={`w-full px-6 py-4 rounded-2xl border ${errors.name ? 'border-red-500 bg-red-50/10 text-red-900' : 'border-slate-100 bg-slate-50/50'} focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all text-sm font-bold placeholder:text-slate-400`}
+                    className={`w-full px-6 py-4 rounded-2xl border ${errors.name ? 'border-red-500 bg-red-50/10 text-red-900' : 'border-slate-100 bg-slate-50/80'} focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all text-sm font-bold placeholder:text-slate-400 shadow-sm`}
                   />
                   {errors.name && <p className="mt-1.5 text-[10px] text-red-600 font-bold uppercase tracking-wider flex items-center gap-1 ml-2"><AlertCircle size={10} /> {errors.name}</p>}
                 </div>
@@ -300,14 +300,14 @@ export default function Contact() {
           <div className="space-y-8">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
               {[
-                { icon: <Phone size={24} />, label: t('contact_call'), value: '+91 90269 14282', href: 'tel:+919026914282', color: 'bg-brand-50 text-brand-600' },
+                { icon: <Phone size={24} />, label: t('contact_call'), value: '+91 90269 14282', href: 'tel:+919026914282', color: 'bg-blue-50 text-blue-600' },
                 { icon: <MessageCircle size={24} />, label: t('contact_whatsapp'), value: '+91 90269 14282', href: 'https://wa.me/919026914282?text=Hello%21%20I%20have%20a%20query%20regarding%20Statistics%20coaching.', color: 'bg-green-50 text-green-600' },
               ].map((item, idx) => (
                 <motion.a
                   key={idx}
                   href={item.href}
                   whileHover={{ y: -5 }}
-                  className="bg-white p-8 rounded-[2rem] border border-slate-100 flex flex-col gap-6 group hover:border-brand-500 transition-all shadow-xl shadow-slate-200/40 relative overflow-hidden"
+                  className="bg-white p-8 rounded-[2rem] border border-slate-100 flex flex-col gap-6 group hover:border-blue-500 transition-all shadow-xl shadow-slate-200/20 relative overflow-hidden"
                 >
                   <div className={`w-14 h-14 rounded-2xl flex items-center justify-center ${item.color} group-hover:scale-110 transition-transform`}>
                     {item.icon}
@@ -320,7 +320,7 @@ export default function Contact() {
               ))}
             </div>
 
-            <div className="bg-white p-3 rounded-[3rem] shadow-2xl shadow-slate-200/60 border border-slate-100 overflow-hidden aspect-video relative group">
+            <div className="bg-white p-3 rounded-[3rem] shadow-2xl border border-slate-100 overflow-hidden aspect-video relative group">
                <iframe 
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3558.9979954634!2d80.93691667522288!3d26.871804776671674!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399bfd2c34096d99%3A0x138ee07fb9051a9f!2sSAMPOORNA%20LIBRARY%20AND%20CLASSES!5e0!3m2!1sen!2sin!4v1777570094434!5m2!1sen!2sin" 
                 width="100%" 
@@ -335,7 +335,7 @@ export default function Contact() {
                 target="_blank" 
                 rel="noopener noreferrer" 
                 whileHover={{ y: -4 }}
-                className="absolute bottom-8 left-8 right-8 p-5 bg-white/95 backdrop-blur-md rounded-2xl border border-white/50 shadow-2xl flex items-center gap-5 transition-all group-hover:shadow-brand-500/10"
+                className="absolute bottom-8 left-8 right-8 p-5 bg-slate-50/95 backdrop-blur-md rounded-2xl border border-slate-100 shadow-2xl flex items-center gap-5 transition-all group-hover:shadow-brand-500/10"
               >
                 <div className="w-12 h-12 bg-brand-600 rounded-xl flex items-center justify-center text-white shrink-0 shadow-lg shadow-brand-500/20">
                   <MapPin size={22} />

@@ -29,15 +29,15 @@ const YouTubeGallery = memo(() => {
 
   useEffect(() => {
     const fetchVideos = async () => {
-      // Check cache first in localStorage with 24h expiration
+      // Check cache first in localStorage with 12h expiration
       const cachedData = localStorage.getItem('youtube_cache');
       const now = new Date().getTime();
-      const ONE_DAY = 24 * 60 * 60 * 1000;
+      const CACHE_TIME = 12 * 60 * 60 * 1000;
 
       if (cachedData) {
         try {
           const { videos: cachedVideos, timestamp } = JSON.parse(cachedData);
-          if (now - timestamp < ONE_DAY) {
+          if (now - timestamp < CACHE_TIME) {
             setVideos(cachedVideos);
             setIsLoading(false);
             return;
@@ -47,16 +47,52 @@ const YouTubeGallery = memo(() => {
         }
       }
 
-      try {
-        const rssUrl = `https://www.youtube.com/feeds/videos.xml?channel_id=${CHANNEL_ID}`;
+      const rssUrl = `https://www.youtube.com/feeds/videos.xml?channel_id=${CHANNEL_ID}`;
+      
+      const tryFetchWithRss2Json = async () => {
         const response = await fetch(`https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`);
+        if (!response.ok) throw new Error('Rss2Json fetch failed');
         const data = await response.json();
-        
         if (data.status === 'ok' && data.items && data.items.length > 0) {
-          const fetchedVideos = data.items.slice(0, 10).map((item: any) => ({
-            id: item.guid.split(':')[2], 
+          return data.items.slice(0, 10).map((item: any) => ({
+            id: item.guid.split(':')[2] || item.link.split('v=')[1], 
             title: item.title,
           }));
+        }
+        throw new Error('Invalid data from Rss2Json');
+      };
+
+      const tryFetchWithAllOrigins = async () => {
+        const response = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(rssUrl)}`);
+        if (!response.ok) throw new Error('AllOrigins fetch failed');
+        const data = await response.json();
+        const xmlString = data.contents;
+        
+        const parser = new DOMParser();
+        const xmlDoc = parser.parseFromString(xmlString, "text/xml");
+        const entries = xmlDoc.getElementsByTagName("entry");
+        
+        if (entries.length > 0) {
+          return Array.from(entries).slice(0, 10).map((entry: any) => {
+            const videoId = entry.getElementsByTagName("yt:videoId")[0]?.textContent || 
+                            entry.getElementsByTagName("id")[0]?.textContent?.split(':').pop();
+            const title = entry.getElementsByTagName("title")[0]?.textContent;
+            return { id: videoId, title };
+          }).filter(v => v.id);
+        }
+        throw new Error('No entries found in RSS');
+      };
+
+      try {
+        let fetchedVideos;
+        try {
+          fetchedVideos = await tryFetchWithRss2Json();
+        } catch (rssError) {
+          console.warn('Primary YouTube fetch failed, trying fallback...');
+          fetchedVideos = await tryFetchWithAllOrigins();
+        }
+
+        if (fetchedVideos && fetchedVideos.length > 0) {
           setVideos(fetchedVideos);
           localStorage.setItem('youtube_cache', JSON.stringify({
             videos: fetchedVideos,
@@ -64,7 +100,8 @@ const YouTubeGallery = memo(() => {
           }));
         }
       } catch (error) {
-        console.error('Error fetching YouTube videos:', error);
+        console.warn('YouTube fetch failure, using Fallback Videos:', error);
+        // Fallback videos are already in the state by default
       } finally {
         setIsLoading(false);
       }
@@ -187,7 +224,7 @@ const YouTubeGallery = memo(() => {
   };
 
   return (
-    <section id="youtube" className="pt-6 pb-6 md:pt-[30px] md:pb-[30px] bg-slate-50 border-y border-slate-100 overflow-hidden relative">
+    <section id="youtube" className="pt-6 pb-6 md:pt-[30px] md:pb-[30px] bg-transparent border-y border-slate-400/20 overflow-hidden relative">
       {/* Decorative background element */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-red-500/10 blur-[120px] -z-0" />
       
@@ -204,7 +241,7 @@ const YouTubeGallery = memo(() => {
             <p className="text-slate-600 text-base md:text-xl leading-relaxed max-w-2xl mb-6 md:mb-8 font-medium">
               {t('youtube_subtitle')}
             </p>
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-white text-red-700 rounded-full text-[10px] md:text-[11px] font-bold uppercase tracking-widest border border-red-50 italic shadow-sm">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-slate-50 text-red-700 rounded-full text-[10px] md:text-[11px] font-bold uppercase tracking-widest border border-red-50 italic shadow-sm">
               ✨ {t('youtube_quality_msg')}
             </div>
           </div>
@@ -297,14 +334,14 @@ const YouTubeGallery = memo(() => {
             <div className="flex justify-center gap-4 mt-4">
               <button
                 onClick={() => handleManualScroll('left')}
-                className="w-12 h-12 rounded-full bg-white border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-red-600 hover:text-white hover:border-red-600 transition-all shadow-sm"
+                className="w-12 h-12 rounded-full bg-white border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-red-600 hover:text-white hover:border-red-600 transition-all shadow-lg"
                 aria-label="Previous YouTube video"
               >
                 <ChevronLeft size={24} />
               </button>
               <button
                 onClick={() => handleManualScroll('right')}
-                className="w-12 h-12 rounded-full bg-white border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-red-600 hover:text-white hover:border-red-600 transition-all shadow-sm"
+                className="w-12 h-12 rounded-full bg-white border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-red-600 hover:text-white hover:border-red-600 transition-all shadow-lg"
                 aria-label="Next YouTube video"
               >
                 <ChevronRight size={24} />
@@ -359,7 +396,7 @@ const YouTubeGallery = memo(() => {
               <div className="mt-8 flex flex-col sm:flex-row items-center gap-6" onClick={(e) => e.stopPropagation()}>
                 <button
                   onClick={closeModal}
-                  className="flex items-center justify-center w-10 h-10 bg-white text-slate-900 rounded-full hover:bg-slate-100 transition-all shadow-xl shadow-black/40 border border-white/20 group"
+                  className="flex items-center justify-center w-10 h-10 bg-slate-50 text-slate-900 rounded-full hover:bg-slate-100 transition-all shadow-xl shadow-black/40 border border-white/20 group"
                   aria-label={t('back')}
                 >
                   <X size={20} strokeWidth={2.5} className="group-hover:rotate-90 transition-transform duration-300 text-red-600" />

@@ -11,14 +11,14 @@ export default function LanguageToggle() {
         <motion.div 
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
-          className="flex items-center gap-1 bg-white/80 backdrop-blur-md border border-slate-200 p-1 rounded-2xl shadow-2xl overflow-hidden"
+          className="flex items-center gap-1 bg-slate-50/80 backdrop-blur-md border border-slate-200 p-1 rounded-2xl shadow-2xl overflow-hidden"
         >
           <button
             onClick={() => setLanguage('en')}
             className={`flex items-center gap-2 px-3 py-1.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all ${
               language === 'en' 
-                ? 'bg-brand-dark text-white' 
-                : 'text-slate-400 hover:text-slate-600 hover:bg-slate-100'
+                ? 'bg-brand-dark text-slate-100' 
+                : 'text-slate-400 hover:text-slate-600 hover:bg-slate-200/50'
             }`}
           >
             EN
@@ -27,8 +27,8 @@ export default function LanguageToggle() {
             onClick={() => setLanguage('hi')}
             className={`flex items-center gap-2 px-3 py-1.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all ${
               language === 'hi' 
-                ? 'bg-brand-dark text-white' 
-                : 'text-slate-400 hover:text-slate-600 hover:bg-slate-100'
+                ? 'bg-brand-dark text-slate-100' 
+                : 'text-slate-400 hover:text-slate-600 hover:bg-slate-200/50'
             }`}
           >
             HI
@@ -48,12 +48,12 @@ export default function LanguageToggle() {
         className="bg-[#25D366] text-white p-4 rounded-2xl shadow-2xl shadow-[#25D366]/40 flex items-center justify-center group relative"
       >
         <MessageCircle size={24} className="fill-current" />
-        <span className="absolute right-full mr-4 px-3 py-1.5 bg-white text-[#25D366] text-[10px] font-black rounded-lg shadow-xl opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap border border-green-50 pointer-events-none">
+        <span className="absolute right-full mr-4 px-3 py-1.5 bg-slate-50 text-[#25D366] text-[10px] font-black rounded-lg shadow-xl opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap border border-green-100 pointer-events-none">
           CHAT WITH SG SIR
         </span>
         <span className="absolute -top-1 -right-1 flex h-3 w-3">
-          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
-          <span className="relative inline-flex rounded-full h-3 w-3 bg-white"></span>
+          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-slate-100 opacity-75"></span>
+          <span className="relative inline-flex rounded-full h-3 w-3 bg-slate-100"></span>
         </span>
       </motion.a>
     </div>

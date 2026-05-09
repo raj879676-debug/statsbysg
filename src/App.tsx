@@ -13,13 +13,14 @@ import Home from './components/Home';
 import GlobalAnnouncements from './components/GlobalAnnouncements';
 import ScrollControls from './components/ScrollControls';
 import LanguageToggle from './components/LanguageToggle';
+import FloatingSymbols from './components/FloatingSymbols';
 
 const Terms = lazy(() => import('./components/Terms'));
 const Refund = lazy(() => import('./components/Refund'));
 const ClassroomPage = lazy(() => import('./components/ClassroomPage'));
 
 const PageLoader = () => (
-  <div className="min-h-screen flex items-center justify-center bg-white">
+  <div className="min-h-screen flex items-center justify-center bg-slate-50">
     <Loader2 className="w-10 h-10 text-brand-600 animate-spin" />
   </div>
 );
@@ -128,7 +129,8 @@ function AppContent() {
 
   return (
     <div className="flex flex-col min-h-screen relative">
-      <div className="flex-1">
+      <FloatingSymbols />
+      <div className="flex-1 relative z-10">
         {renderContent()}
       </div>
       <ScrollControls currentPage={currentPage} onBack={() => currentPage !== 'home' && window.history.back()} />

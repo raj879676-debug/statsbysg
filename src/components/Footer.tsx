@@ -35,7 +35,7 @@ export default function Footer({ onNavigate, hideMaterials = false, isSecondary 
       {/* Subpage Banners */}
       {isSecondary && <SubpageBanners />}
 
-      <div className="bg-brand-dark pt-[18px] pb-[45px] px-4 border-t-4 border-blue-600">
+      <div className="bg-brand-dark/95 backdrop-blur-md pt-[18px] pb-[45px] px-4 border-t-4 border-blue-600">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-20 text-center md:text-left">
           

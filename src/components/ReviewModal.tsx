@@ -51,9 +51,10 @@ export default function ReviewModal({ isOpen, onClose }: ReviewModalProps) {
     }
 
     const path = 'reviews';
+    console.log("Submitting review to path:", path);
     try {
       if (isFirebaseConfigured && db) {
-        await addDoc(collection(db, path), {
+        const reviewData = {
           name: formData.name,
           year: formData.year,
           review: formData.review,
@@ -61,8 +62,12 @@ export default function ReviewModal({ isOpen, onClose }: ReviewModalProps) {
           approved: false, // Default to false for admin approval
           createdAt: serverTimestamp(),
           imageUrl: finalImageUrl
-        });
+        };
+        console.log("Review data prepared:", reviewData);
+        const docRef = await addDoc(collection(db, path), reviewData);
+        console.log("Review successfully added with ID:", docRef.id);
       } else {
+        console.warn("Firebase not fully configured or DB missing. demo mode fallback.");
         // Demo mode: just wait and succeed
         await new Promise(resolve => setTimeout(resolve, 1500));
         console.log("Demo mode: Review recorded locally", {
@@ -75,6 +80,7 @@ export default function ReviewModal({ isOpen, onClose }: ReviewModalProps) {
       }
 
       setIsSubmitted(true);
+      console.log("Setting isSubmitted to true");
       setTimeout(() => {
         setIsSubmitted(false);
         onClose();
@@ -82,6 +88,7 @@ export default function ReviewModal({ isOpen, onClose }: ReviewModalProps) {
         setRating(5);
       }, 3000);
     } catch (error) {
+      console.error("Critical error adding review:", error);
       if (isFirebaseConfigured) {
         handleFirestoreError(error, OperationType.CREATE, path);
       } else {

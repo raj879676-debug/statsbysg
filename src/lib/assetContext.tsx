@@ -60,7 +60,7 @@ export const AssetProvider = ({ children }: { children: ReactNode }) => {
       });
       setOverrides(newOverrides);
     }, (error) => {
-      handleFirestoreError(error, OperationType.GET, pathAssets);
+      handleFirestoreError(error, OperationType.LIST, pathAssets);
     });
 
     const unsubAnnouncements = onSnapshot(qAnnouncements, (snapshot) => {
@@ -70,7 +70,7 @@ export const AssetProvider = ({ children }: { children: ReactNode }) => {
       });
       setAnnouncements(newAnn);
     }, (error) => {
-      handleFirestoreError(error, OperationType.GET, pathAnnouncements);
+      handleFirestoreError(error, OperationType.LIST, pathAnnouncements);
     });
 
     setIsLoading(false);
