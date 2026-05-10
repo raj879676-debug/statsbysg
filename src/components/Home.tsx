@@ -26,7 +26,7 @@ export default function Home({ onNavigate }: HomeProps) {
     <div className="flex flex-col min-h-screen">
       <main className="flex-1">
         <div className="relative">
-          <div className="hidden lg:block">
+          <div className="absolute inset-0 hidden lg:block z-0 overflow-hidden">
             <StatisticalBackground />
           </div>
           <Hero />

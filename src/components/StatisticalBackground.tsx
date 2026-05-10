@@ -159,12 +159,6 @@ const StatisticalBackground: React.FC = () => {
       const width = canvas.width;
       const height = canvas.height;
 
-      // Only show visualizations on screen widths >= 600px to avoid clutter on mobile
-      if (width < 600) {
-        animationFrameId = requestAnimationFrame(render);
-        return;
-      }
-
       const centerX = width / 2;
       const centerY = height / 2;
       
@@ -726,7 +720,7 @@ const StatisticalBackground: React.FC = () => {
   return (
     <canvas 
       ref={canvasRef} 
-      className="absolute inset-0 -z-10 pointer-events-none opacity-70 select-none"
+      className="absolute inset-0 pointer-events-none opacity-70 select-none"
     />
   );
 };
