@@ -115,7 +115,7 @@ export default function ReviewModal({ isOpen, onClose }: ReviewModalProps) {
             initial={{ opacity: 0, scale: 0.9, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 20 }}
-            className="bg-white rounded-[2.5rem] shadow-2xl relative z-10 w-full max-w-lg max-h-[90vh] overflow-y-auto border border-slate-100 custom-scrollbar"
+            className="bg-indigo-50/95 backdrop-blur-xl rounded-[2.5rem] shadow-2xl relative z-10 w-full max-w-lg max-h-[90vh] overflow-y-auto border-2 border-white shadow-[0_30px_100px_-20px_rgba(37,99,235,0.2)] custom-scrollbar"
           >
             <button
               onClick={onClose}

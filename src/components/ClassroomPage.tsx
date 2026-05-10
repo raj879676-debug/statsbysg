@@ -86,7 +86,7 @@ const ClassroomPage = memo(({ onBack, onNavigate, initialView = 'initial', onVie
           whileHover={{ y: -10 }}
           whileTap={{ scale: 0.98 }}
           onClick={() => handleViewChange(item.id as ViewType)}
-          className="group relative bg-white p-10 rounded-[2.5rem] border-2 border-slate-100 hover:border-brand-500 transition-all text-left shadow-xl shadow-slate-200/50 overflow-hidden"
+          className="group relative bg-slate-50 p-10 rounded-[2.5rem] border-2 border-slate-200 hover:border-brand-500 transition-all text-left shadow-xl shadow-slate-300/50 overflow-hidden"
         >
           <div className="absolute top-0 right-0 w-32 h-32 bg-brand-50 rounded-full translate-x-16 -translate-y-16 group-hover:scale-150 transition-transform duration-500" />
           <div className="relative z-10">
@@ -112,7 +112,7 @@ const ClassroomPage = memo(({ onBack, onNavigate, initialView = 'initial', onVie
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         {items.map((course, idx) => (
-          <div key={idx} className="flex items-center justify-between p-4 bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-all group">
+          <div key={idx} className="flex items-center justify-between p-4 bg-slate-50 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-all group">
             <div className="flex items-center gap-3">
               <CheckCircle2 className="text-brand-500 shrink-0" size={18} />
               <span className="text-slate-700 font-bold text-sm tracking-tight">{course}</span>
@@ -134,12 +134,12 @@ const ClassroomPage = memo(({ onBack, onNavigate, initialView = 'initial', onVie
 
   const renderUniversity = () => (
     <div className="max-w-6xl mx-auto px-4 space-y-12">
-      <div className="text-center bg-white p-8 rounded-[2.5rem] border-2 border-brand-100 shadow-xl shadow-brand-50/50">
+      <div className="text-center bg-slate-50 p-8 rounded-[2.5rem] border-2 border-brand-100 shadow-xl shadow-brand-50/50">
         <p className="text-slate-600 font-bold max-w-2xl mx-auto leading-relaxed text-sm md:text-lg">
           In <span className="text-brand-600 font-black italic">UNIVERSITY EXAM</span>, these courses are provided for all semesters 
-          <span className="font-black text-slate-900 mx-2 scale-110 inline-block tracking-widest bg-slate-100 px-3 py-1 rounded-lg">I-VI</span> 
+          <span className="font-black text-slate-900 mx-2 scale-110 inline-block tracking-widest bg-slate-200 px-3 py-1 rounded-lg">I-VI</span> 
           in graduation level and 
-          <span className="font-black text-slate-900 mx-2 scale-110 inline-block tracking-widest bg-slate-100 px-3 py-1 rounded-lg">I-IV</span> 
+          <span className="font-black text-slate-900 mx-2 scale-110 inline-block tracking-widest bg-slate-200 px-3 py-1 rounded-lg">I-IV</span> 
           in postgraduation level.
         </p>
       </div>
@@ -159,13 +159,13 @@ const ClassroomPage = memo(({ onBack, onNavigate, initialView = 'initial', onVie
                   : uniSubjects.filter(s => s === 'Statistics' || s === 'Mathematics');
 
                 return (
-                  <div key={level} className="bg-white p-6 rounded-3xl border border-slate-100 shadow-lg flex flex-col md:flex-row gap-6 items-center">
+                  <div key={level} className="bg-slate-50 p-6 rounded-3xl border border-slate-200 shadow-lg flex flex-col md:flex-row gap-6 items-center">
                     <div className="w-20 h-20 bg-brand-600 rounded-2xl flex items-center justify-center text-white text-2xl font-black shadow-lg shrink-0">
                       {level}
                     </div>
                     <div className="flex-1 flex flex-wrap gap-4 justify-center md:justify-start">
                       {subjects.map((sub) => (
-                        <div key={sub} className="px-6 py-4 bg-white rounded-2xl hover:bg-brand-50 transition-all cursor-default border-2 border-slate-100 shadow-md hover:shadow-brand-200 hover:border-brand-300 transform hover:-translate-y-1">
+                        <div key={sub} className="px-6 py-4 bg-slate-50 rounded-2xl hover:bg-brand-50 transition-all cursor-default border-2 border-slate-200 shadow-md hover:shadow-brand-200 hover:border-brand-300 transform hover:-translate-y-1">
                           <span className="font-black text-slate-900 text-lg md:text-2xl uppercase tracking-tighter">{sub}</span>
                         </div>
                       ))}
@@ -184,7 +184,7 @@ const ClassroomPage = memo(({ onBack, onNavigate, initialView = 'initial', onVie
     <div className="max-w-6xl mx-auto px-4">
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {schoolClasses.map((cls) => (
-          <div key={cls} className="bg-white p-8 rounded-3xl border-2 border-slate-100 hover:border-brand-200 transition-all shadow-lg hover:shadow-2xl">
+          <div key={cls} className="bg-slate-50 p-8 rounded-3xl border-2 border-slate-200 hover:border-brand-200 transition-all shadow-lg hover:shadow-2xl">
             <div className="w-12 h-12 bg-slate-900 rounded-xl flex items-center justify-center text-white font-black mb-6">
               {cls.split(' ')[1]}
             </div>

@@ -177,10 +177,10 @@ const Courses = memo(() => {
               href="https://play.google.com/store/apps/details?id=co.khal.gdifh" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-4 px-6 py-3 bg-slate-50 text-blue-600 font-bold rounded-2xl hover:bg-slate-100 transition-all border border-blue-100 group shadow-sm"
+              className="inline-flex items-center gap-4 px-6 py-3 bg-slate-100 text-blue-600 font-bold rounded-2xl hover:bg-slate-200 transition-all border border-blue-100 group shadow-sm"
             >
 
-              <div className="w-8 h-8 bg-slate-100 rounded-lg flex items-center justify-center p-1 shadow-sm group-hover:scale-110 transition-transform overflow-hidden">
+              <div className="w-8 h-8 bg-slate-200 rounded-lg flex items-center justify-center p-1 shadow-sm group-hover:scale-110 transition-transform overflow-hidden">
                 <Logo hideText={true} size="w-full h-full" />
               </div>
               {t('explore_app')} 
@@ -198,7 +198,7 @@ const Courses = memo(() => {
           {/* Navigation Arrows (All Devices) */}
           <button 
             onClick={prevSlide}
-            className="absolute left-0 lg:-left-6 top-1/2 -translate-y-1/2 z-20 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-slate-50 border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-blue-600 hover:text-white hover:border-blue-600 transition-all shadow-lg group"
+            className="absolute left-0 lg:-left-6 top-1/2 -translate-y-1/2 z-20 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-slate-100 border border-slate-300 flex items-center justify-center text-slate-600 hover:bg-blue-600 hover:text-white hover:border-blue-600 transition-all shadow-lg group"
             aria-label="Previous slide"
           >
             <ChevronLeft size={20} className="sm:hidden" />
@@ -207,7 +207,7 @@ const Courses = memo(() => {
 
           <button 
             onClick={nextSlide}
-            className="absolute right-0 lg:-right-6 top-1/2 -translate-y-1/2 z-20 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-slate-50 border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-blue-600 hover:text-white hover:border-blue-600 transition-all shadow-lg group"
+            className="absolute right-0 lg:-right-6 top-1/2 -translate-y-1/2 z-20 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-slate-100 border border-slate-300 flex items-center justify-center text-slate-600 hover:bg-blue-600 hover:text-white hover:border-blue-600 transition-all shadow-lg group"
             aria-label="Next slide"
           >
             <ChevronRight size={20} className="sm:hidden" />
@@ -238,7 +238,7 @@ const Courses = memo(() => {
                 >
                   <motion.div
                     whileHover={{ y: -5 }}
-                    className="h-full bg-slate-50 p-5 sm:p-6 rounded-[1.5rem] border-2 border-transparent transition-all duration-300 hover:border-blue-500 hover:shadow-xl flex flex-col scale-100 shadow-sm"
+                    className="h-full bg-slate-100 p-5 sm:p-6 rounded-[1.5rem] border-2 border-transparent transition-all duration-300 hover:border-blue-500 hover:shadow-xl flex flex-col scale-100 shadow-sm"
                   >
                     <div className="flex justify-between items-start mb-3">
                       <div className="w-11 h-11 bg-blue-50 rounded-xl flex items-center justify-center group-hover:bg-blue-600 group-hover:text-white transition-colors duration-300">

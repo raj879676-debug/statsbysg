@@ -10,17 +10,18 @@ import { AuthProvider, useAuth } from './lib/AuthContext';
 import { persistenceService } from './lib/PersistenceService';
 import { Loader2 } from 'lucide-react';
 import Home from './components/Home';
+import Navbar from './components/Navbar';
+import Announcement from './components/Announcement';
 import GlobalAnnouncements from './components/GlobalAnnouncements';
 import ScrollControls from './components/ScrollControls';
 import LanguageToggle from './components/LanguageToggle';
-import FloatingSymbols from './components/FloatingSymbols';
 
 const Terms = lazy(() => import('./components/Terms'));
 const Refund = lazy(() => import('./components/Refund'));
 const ClassroomPage = lazy(() => import('./components/ClassroomPage'));
 
 const PageLoader = () => (
-  <div className="min-h-screen flex items-center justify-center bg-slate-100">
+  <div className="min-h-screen flex items-center justify-center bg-slate-200">
     <Loader2 className="w-10 h-10 text-brand-600 animate-spin" />
   </div>
 );
@@ -129,7 +130,15 @@ function AppContent() {
 
   return (
     <div className="flex flex-col min-h-screen relative">
-      <FloatingSymbols />
+      <div className="relative z-[100]">
+        <GlobalAnnouncements />
+      </div>
+      <div className="relative z-[90]">
+        <Announcement />
+      </div>
+      <div className="relative z-[80]">
+        <Navbar onNavigate={navigateTo} isHome={currentPage === 'home'} />
+      </div>
       <div className="flex-1 relative z-10">
         {renderContent()}
       </div>

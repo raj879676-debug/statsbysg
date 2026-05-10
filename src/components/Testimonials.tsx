@@ -156,39 +156,45 @@ const Testimonials = memo(() => {
           {[...testimonials, ...testimonials, ...testimonials].map((t, idx) => (
             <motion.div
               key={idx}
-              whileHover={{ y: -5, scale: 1.01 }}
-              className="bg-white p-6 rounded-2xl w-[280px] md:w-[320px] flex-shrink-0 whitespace-normal shadow-xl border border-blue-100 flex flex-col group relative"
+              whileHover={{ y: -8, scale: 1.02 }}
+              className="bg-indigo-100/90 backdrop-blur-md p-8 rounded-[2rem] w-[300px] md:w-[360px] flex-shrink-0 whitespace-normal shadow-2xl border-2 border-indigo-200/50 flex flex-col group relative overflow-hidden transition-all duration-500"
             >
-              <div className="absolute -top-3 -right-3 w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center text-white shadow-lg rotate-12 group-hover:rotate-0 transition-transform">
-                <Quote size={18} fill="currentColor" />
+              <div className="absolute top-0 right-0 w-24 h-24 bg-indigo-400/10 rounded-full translate-x-8 -translate-y-8 group-hover:scale-150 transition-all duration-1000" />
+              <div className="absolute -top-3 -right-3 w-14 h-14 bg-indigo-600 rounded-2xl flex items-center justify-center text-white shadow-xl rotate-12 group-hover:rotate-0 transition-transform duration-500 z-10">
+                <Quote size={28} fill="currentColor" className="opacity-80" />
               </div>
 
 
-              <div className="flex text-yellow-400 mb-6 gap-0.5">
+              <div className="flex text-amber-500 mb-6 gap-1 relative z-10">
                 {[...Array(5)].map((_, i) => (
-                  <Star key={i} size={16} fill="currentColor" />
+                  <Star key={i} size={15} fill="currentColor" className="drop-shadow-sm" />
                 ))}
               </div>
               
               <div className="relative flex-grow">
-                <p className="text-slate-600 leading-relaxed text-xs font-medium mb-6">
+                <p className="text-indigo-950 leading-relaxed text-base font-black mb-8 italic tracking-tight bg-indigo-50/50 p-3 rounded-xl border border-indigo-100/50 shadow-sm">
                   "{t.text}"
                 </p>
               </div>
 
-              <div className="flex items-center gap-3 pt-4 border-t border-slate-100">
-                <img 
-                  src={t.image} 
-                  alt={t.name}
-                  className="w-12 h-12 rounded-full object-cover border-2 border-blue-50 shadow-md"
-                  width="48"
-                  height="48"
-                  loading="lazy"
-                  referrerPolicy="no-referrer"
-                />
+              <div className="flex items-center gap-4 pt-6 border-t border-indigo-200/40 relative z-10">
+                <div className="relative">
+                  <div className="absolute inset-0 bg-indigo-600 rounded-full scale-110 blur-[2px] opacity-20" />
+                  <img 
+                    src={t.image} 
+                    alt={t.name}
+                    className="w-14 h-14 rounded-full object-cover border-2 border-white shadow-xl relative z-10"
+                    width="56"
+                    height="56"
+                    loading="lazy"
+                    referrerPolicy="no-referrer"
+                  />
+                </div>
                 <div>
-                  <p className="font-bold text-slate-900 text-sm">{t.name}</p>
-                  <p className="text-[9px] font-bold text-blue-600 uppercase tracking-widest">{t.role}</p>
+                  <p className="font-black text-indigo-950 text-base leading-tight">{t.name}</p>
+                  <p className="text-[10px] font-black text-indigo-600 uppercase tracking-widest mt-1 bg-white/50 px-2 py-0.5 rounded-full inline-block">
+                    {t.role}
+                  </p>
                 </div>
               </div>
               

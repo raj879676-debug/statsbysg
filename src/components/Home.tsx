@@ -6,6 +6,7 @@ import Courses from './Courses';
 import { Loader2 } from 'lucide-react';
 import { motion } from 'motion/react';
 import { useLanguage } from '../lib/LanguageContext';
+import StatisticalBackground from './StatisticalBackground';
 
 const YouTubeGallery = lazy(() => import('./YouTubeGallery'));
 const Testimonials = lazy(() => import('./Testimonials'));
@@ -23,10 +24,13 @@ export default function Home({ onNavigate }: HomeProps) {
   const { t } = useLanguage();
   return (
     <div className="flex flex-col min-h-screen">
-      <Announcement />
-      <Navbar />
       <main className="flex-1">
-        <Hero />
+        <div className="relative">
+          <div className="hidden lg:block">
+            <StatisticalBackground />
+          </div>
+          <Hero />
+        </div>
         <Courses />
         <Suspense fallback={<div className="h-96 flex items-center justify-center"><Loader2 className="animate-spin text-brand-600" /></div>}>
           <OfflineClasses onNavigate={onNavigate} />

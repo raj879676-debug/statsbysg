@@ -170,7 +170,7 @@ export default function OfflineClasses({ onNavigate }: OfflineClassesProps) {
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.05 }}
-                className="inline-flex items-center gap-2 px-4 py-2 bg-violet-100 text-violet-700 rounded-full text-xs font-black uppercase tracking-widest border border-violet-200 cursor-pointer shadow-sm hover:bg-violet-200 transition-colors"
+                className="inline-flex items-center gap-2 px-4 py-2 bg-violet-200 text-violet-800 rounded-full text-xs font-black uppercase tracking-widest border border-violet-300 cursor-pointer shadow-sm hover:bg-violet-300 transition-colors"
               >
                 <MapPin size={14} className="animate-bounce text-violet-600" />
                 {t('offline_location_badge')}
@@ -212,7 +212,7 @@ export default function OfflineClasses({ onNavigate }: OfflineClassesProps) {
               initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              className="mb-6 sm:mb-10 rounded-2xl sm:rounded-3xl overflow-hidden shadow-lg border-2 sm:border-4 border-slate-50 aspect-[4/3] sm:aspect-video relative group"
+              className="mb-6 sm:mb-10 rounded-2xl sm:rounded-3xl overflow-hidden shadow-lg border-2 sm:border-4 border-slate-100 aspect-[4/3] sm:aspect-video relative group"
             >
               <img 
                 src="https://lh3.googleusercontent.com/d/1Sr8m-x6gKs8C3P5x8wIEAZickjviYqSx" 

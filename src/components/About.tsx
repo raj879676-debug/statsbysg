@@ -25,7 +25,7 @@ const About = memo(() => {
             transition={{ duration: 0.8 }}
             className="relative"
           >
-            <div className="absolute inset-0 bg-blue-500/10 rounded-[3rem] blur-3xl -z-10" />
+            {/* Background blur - REMOVED */}
             <div className="relative z-10 rounded-3xl overflow-hidden shadow-2xl border-4 border-slate-200 bg-slate-100">
               <img 
                 src={overrides['about_image']?.url || "https://lh3.googleusercontent.com/d/1qWmTdNXHKjykMQw6fTY4eCUkGzvohNYa"}

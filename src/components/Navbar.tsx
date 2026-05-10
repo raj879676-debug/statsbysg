@@ -6,10 +6,29 @@ import { STAT_SYMBOLS } from '../constants';
 
 import Logo from './Logo';
 
-const Navbar = memo(() => {
+interface NavbarProps {
+  onNavigate?: (page: string) => void;
+  isHome?: boolean;
+}
+
+const Navbar = memo(({ onNavigate, isHome = true }: NavbarProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const { t } = useLanguage();
+
+  const handleLinkClick = (e: React.MouseEvent, href: string) => {
+    if (!isHome && href.startsWith('#')) {
+      e.preventDefault();
+      onNavigate?.('home');
+      // Give it a moment to render the home page then scroll
+      setTimeout(() => {
+        const element = document.querySelector(href);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 150);
+    }
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -32,9 +51,12 @@ const Navbar = memo(() => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16 items-center">
           <div className="flex items-center flex-shrink-0">
-            <a href="/" className="flex items-center">
+            <button 
+              onClick={() => onNavigate?.('home')} 
+              className="flex items-center cursor-pointer"
+            >
               <Logo className="scale-90" />
-            </a>
+            </button>
           </div>
 
           <div className="hidden lg:flex items-center space-x-6">
@@ -42,6 +64,7 @@ const Navbar = memo(() => {
               <a
                 key={link.name}
                 href={link.href}
+                onClick={(e) => handleLinkClick(e, link.href)}
                 className="text-sm font-semibold text-slate-600 hover:text-blue-600 transition-colors flex items-center gap-1 group"
                 target={link.href.startsWith('http') ? '_blank' : undefined}
                 rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
@@ -92,7 +115,10 @@ const Navbar = memo(() => {
                 <a
                   key={link.name}
                   href={link.href}
-                  onClick={() => setIsOpen(false)}
+                  onClick={(e) => {
+                    handleLinkClick(e, link.href);
+                    setIsOpen(false);
+                  }}
                   className="px-6 py-4 text-base font-bold text-slate-700 hover:bg-slate-50 hover:text-blue-600 transition-colors"
                   target={link.href.startsWith('http') ? '_blank' : undefined}
                   rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}

@@ -17,9 +17,8 @@ export default function AppShowcase() {
   return (
     <section id="app" className="pt-8 pb-8 md:pt-12 md:pb-12 bg-transparent overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-slate-50 rounded-[2.5rem] p-6 sm:p-8 md:p-12 lg:p-16 relative overflow-hidden border border-slate-200 flex flex-col lg:flex-row items-center gap-8 lg:gap-12 shadow-xl shadow-slate-300/20">
-          {/* Background Decorative Element */}
-          <div className="absolute top-0 right-0 w-96 h-96 bg-blue-200/20 blur-[120px] -z-0" />
+        <div className="bg-slate-100 rounded-[2.5rem] p-6 sm:p-8 md:p-12 lg:p-16 relative overflow-hidden border border-slate-300 flex flex-col lg:flex-row items-center gap-8 lg:gap-12 shadow-xl shadow-slate-300/20">
+          {/* Background Decorative Element - REMOVED */}
           
           <div className="flex-[3] relative z-10 text-center lg:text-left">
             <h2 className="text-2xl sm:text-3xl md:text-5xl font-black text-brand-dark mb-4 md:mb-6 leading-tight tracking-tight">
@@ -32,8 +31,8 @@ export default function AppShowcase() {
             
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4 mb-8 md:mb-10">
               {features.map((feature, idx) => (
-                <div key={idx} className="flex items-center gap-3 md:gap-4 bg-slate-100/50 p-3 md:p-4 rounded-2xl border border-slate-200">
-                  <div className="w-8 h-8 md:w-10 md:h-10 bg-slate-100 shadow-sm rounded-xl flex items-center justify-center shrink-0">
+                <div key={idx} className="flex items-center gap-3 md:gap-4 bg-slate-200/50 p-3 md:p-4 rounded-2xl border border-slate-300">
+                  <div className="w-8 h-8 md:w-10 md:h-10 bg-slate-200 shadow-sm rounded-xl flex items-center justify-center shrink-0">
                     {React.cloneElement(feature.icon as React.ReactElement, { size: 18 } as any)}
                   </div>
                   <span className="text-xs md:text-sm font-bold text-brand-dark">{feature.text}</span>
@@ -57,7 +56,7 @@ export default function AppShowcase() {
                   height="60"
                 />
               </a>
-              <div className="flex items-center gap-3 px-5 py-3 bg-slate-100 rounded-xl shadow-sm border border-blue-200 h-[60px]">
+              <div className="flex items-center gap-3 px-5 py-3 bg-slate-200 rounded-xl shadow-sm border border-blue-200 h-[60px]">
                 <Logo className="scale-[0.6] -ml-4" />
                 <div>
                   <p className="font-black text-brand-dark leading-none text-sm">4.9 Stars</p>
@@ -74,7 +73,7 @@ export default function AppShowcase() {
               viewport={{ once: true }}
               className="relative z-10 w-full max-w-[260px] bg-slate-900 aspect-[9/18.5] rounded-[3rem] p-3 shadow-2xl border-[8px] border-slate-800"
             >
-              <div className="w-full h-full bg-slate-100 rounded-[2.2rem] flex flex-col items-center justify-center p-8 text-center gap-3">
+              <div className="w-full h-full bg-slate-200 rounded-[2.2rem] flex flex-col items-center justify-center p-8 text-center gap-3">
                  <div className="w-20 h-20 bg-blue-50 rounded-2xl flex items-center justify-center p-4 shadow-inner">
                    <Logo hideText={true} className="scale-110" />
                  </div>
@@ -89,8 +88,6 @@ export default function AppShowcase() {
                  </div>
               </div>
             </motion.div>
-            {/* Background elements */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[140%] h-[140%] bg-blue-400/20 blur-[120px] -z-10 rounded-full" />
           </div>
         </div>
       </div>
