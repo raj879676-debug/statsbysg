@@ -16,7 +16,7 @@ const worldStatisticians: Statistician[] = [
   { name: "John Tukey", title: "Exploratory Data Analysis Pioneer", image: "https://images.squarespace-cdn.com/content/v1/58cde3fcdb29d633eb688e9e/1608158178942-NAR1H7IISXHVDUUG6BIS/image-asset.jpeg?format=1000w" },
   { name: "David R. Cox", title: "Proportional Hazards Model Pioneer", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRupjH3uVyZ_di_tHqjKpB5NPqavkU3pDQCFqbxolQgZC1cfIVyofUhfYiMtbbYxz958cTTmlyCijKHfsIXDxrvWfh0rW52eelS-bDTy-Y&s=10" },
   { name: "Florence Nightingale", title: "Pioneer of Visualizing Data", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJqSc3voHXhK8_ubFaH-RWvx1Qv-_AYsuw4oNCIAoPO5rbaW566tpRw9he0ZZ17USj-R53Tq4w6W_8CN15PMwHTJiUtpN_y_wTAWJaj2Xm&s=10" },
-  { name: "Gertrude Mary Cox", title: "Expert in Experimental Design", image: "https://upload.wikimedia.org/wikipedia/en/7/7f/Gertrude_Mary_Cox.jpg" },
+  { name: "Gertrude Mary Cox", title: "Expert in Experimental Design", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHpkIYn4zfx2GraZmrx08Pko2f_4-gf3_uPMQiT_xUEmUoMvZ-rLYMFVZi2Xs0iiyEgSQrNUjS7sVlG-PtzYeb34FpVZs6czougsi9hKwm0w&s=10" },
 ];
 
 const indianStatisticians: Statistician[] = [
